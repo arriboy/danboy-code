@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprar tu primera acción explicado a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.05rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="inversiones.html" class="back-link">← volver a inversiones y acciones</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --inversion / artículo 01</div>
+    <h1>Cómo comprar tu primera acción en México</h1>
+    <p class="subtitle">No necesitas ser rico ni experto — hoy puedes empezar con menos de lo que cuesta una comida, usando una casa de bolsa regulada.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">EDAD MÍNIMA</div>
+      <div class="fact-value">18 años</div>
+    </div>
+    <div>
+      <div class="fact-label">DEPÓSITO MÍNIMO</div>
+      <div class="fact-value">Desde ~$20-$100 MXN</div>
+    </div>
+    <div>
+      <div class="fact-label">DOCUMENTOS</div>
+      <div class="fact-value">INE, RFC, comprobante</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué es una acción?</h2>
+    <p>Es como comprar un pedacito muy chiquito de una empresa. Si esa empresa le va bien y gana dinero, tu pedacito vale más. Si le va mal, tu pedacito puede valer menos.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Imagina una pizza gigante que es "la empresa completa". Una acción es solo una rebanada chiquita de esa pizza — no te comes toda la pizza, pero sí una parte.
+    </div>
+
+    <h2>¿Cómo se compra?</h2>
+    <p>Se compra a través de una app o página especial (se llama "casa de bolsa"), donde un adulto se registra, pone algo de dinero, y desde ahí puede comprar pedacitos de empresas que existen de verdad, como tiendas o compañías conocidas.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>¿Qué necesito para empezar?</h2>
+    <p>Ser mayor de edad (18 años) y abrir una cuenta en una <strong>casa de bolsa</strong> regulada por la CNBV (Comisión Nacional Bancaria y de Valores) — nunca en plataformas sin regulación, por seguridad de tu dinero.</p>
+
+    <h2>¿Cuánto dinero necesito?</h2>
+    <p>Menos de lo que muchos creen: varias casas de bolsa en México permiten empezar desde $20 a $100 pesos, gracias a las "acciones fraccionadas" (puedes comprar una fracción de una acción cara, no la acción completa).</p>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      No necesitas comprar una acción completa de una empresa cara — las acciones fraccionadas te permiten invertir con el dinero que tengas disponible, aunque sea poco.
+    </div>
+
+    <h2>Pasos para abrir tu cuenta</h2>
+    <ul class="reqs">
+      <li>Descarga la app de una casa de bolsa regulada por la CNBV.</li>
+      <li>Regístrate con tu identificación oficial (INE), RFC, CURP y comprobante de domicilio.</li>
+      <li>Vincula una cuenta bancaria a tu nombre para depositar y retirar dinero.</li>
+      <li>Deposita el monto con el que quieras empezar.</li>
+      <li>Busca la empresa que te interese y compra tu primera acción (o fracción).</li>
+    </ul>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>El intermediario: casa de bolsa</h2>
+    <p>Para invertir en acciones necesitas un intermediario regulado — una casa de bolsa o broker, que ejecuta tus órdenes de compra/venta y resguarda tu dinero y tus valores. En México, las casas de bolsa nacionales están supervisadas por la CNBV, operan en pesos, y te dan acceso a la Bolsa Mexicana de Valores (BMV), BIVA, y a mercados internacionales mediante el Sistema Internacional de Cotizaciones (SIC).</p>
+
+    <h2>Requisitos de apertura</h2>
+    <ul class="reqs">
+      <li>Ser mayor de 18 años.</li>
+      <li>Identificación oficial vigente (INE o pasaporte).</li>
+      <li>RFC y CURP.</li>
+      <li>Comprobante de domicilio.</li>
+      <li>Cuenta bancaria a tu nombre para depósitos y retiros.</li>
+    </ul>
+    <p>El registro suele hacerse completamente en línea, y la validación de identidad responde a normas contra el lavado de dinero — no es burocracia sin sentido.</p>
+
+    <div class="example-box">
+      <span class="tag">MONTOS DE ENTRADA</span>
+      Los montos mínimos varían bastante entre casas de bolsa: algunas permiten empezar desde $20-$100 pesos gracias a las acciones fraccionadas, mientras que otras orientadas a asesoría personalizada piden montos iniciales más altos, de varios miles de pesos.
+    </div>
+
+    <h2>Estrategias para principiantes</h2>
+    <ul class="reqs">
+      <li><strong>Empieza pequeño:</strong> practica con montos que no comprometan tu situación financiera mientras aprendes la plataforma.</li>
+      <li><strong>Inversión periódica (DCA):</strong> invertir la misma cantidad cada mes, sin importar si el precio subió o bajó, reduce el riesgo de invertir todo justo en el peor momento.</li>
+      <li><strong>Usa simuladores:</strong> varias plataformas ofrecen cuentas de práctica con dinero virtual antes de arriesgar dinero real.</li>
+      <li><strong>Si eres principiante, considera empezar por fondos o ETFs</strong> (que ya vienen diversificados) antes que por acciones individuales de una sola empresa.</li>
+    </ul>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Marco regulatorio y elección de intermediario</h2>
+    <p>Las casas de bolsa mexicanas operan bajo supervisión de la CNBV, lo que habilita recurso ante la CONDUSEF en caso de conflicto. Esto las distingue de brokers internacionales regulados bajo otras jurisdicciones (CySEC, FCA), que ofrecen acceso a mercados globales con estructuras de comisión distintas pero sin la misma vía de reclamación local. La calificación CNBV de cada casa de bolsa (publicada periódicamente) es un indicador relevante de calidad regulatoria y solidez operativa a considerar antes de elegir intermediario.</p>
+
+    <h2>Estructura de costos</h2>
+    <p>Las comisiones varían según el modelo de negocio: casas de bolsa tradicionales suelen cobrar comisión por operación (habitualmente entre 0.10% y 0.25% del monto operado), mientras que algunos brokers internacionales operan bajo modelos de comisión cero, compensando el margen vía spread o financiamiento del propio flujo de órdenes. El costo total efectivo debe evaluarse considerando también comisiones de custodia (INDEVAL) y estructura fiscal aplicable a la ganancia de capital.</p>
+
+    <div class="example-box">
+      <span class="tag">ACCESO A MERCADOS INTERNACIONALES</span>
+      El Sistema Internacional de Cotizaciones (SIC) permite a las casas de bolsa mexicanas ofrecer acceso a acciones que cotizan en bolsas extranjeras (principalmente EE.UU.) sin necesidad de abrir una cuenta directamente en el extranjero, aunque generalmente con un universo de instrumentos más acotado que un broker internacional nativo.
+    </div>
+
+    <h2>Consideraciones para la construcción de portafolio inicial</h2>
+    <ul class="reqs">
+      <li>La literatura de finanzas conductuales recomienda que inversionistas principiantes prioricen instrumentos diversificados (ETFs, fondos indexados) sobre la selección de acciones individuales, dado el menor riesgo idiosincrático y la menor exigencia de análisis fundamental continuo.</li>
+      <li>El costo promedio de adquisición (dollar-cost averaging) mitiga el riesgo de timing de mercado, particularmente relevante para inversionistas sin experiencia en análisis técnico o fundamental.</li>
+      <li>Las cuentas demo/simuladores permiten validar la usabilidad de la plataforma y el proceso operativo (órdenes, liquidación, retiro) antes de comprometer capital real.</li>
+    </ul>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. No constituye una recomendación de compra sobre ninguna empresa, fondo o casa de bolsa en particular — toda inversión conlleva riesgo de pérdida de capital. No sustituye la asesoría de un asesor de inversiones certificado.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
