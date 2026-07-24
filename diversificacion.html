@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diversificación explicada a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.05rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="inversiones.html" class="back-link">← volver a inversiones y acciones</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --inversion / artículo 04</div>
+    <h1>Diversificación: no arriesgues todo en una sola cosa</h1>
+    <p class="subtitle">Tener 10 acciones del mismo sector no es diversificar — es el error disfrazado de estrategia más común entre principiantes.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">LA IDEA CENTRAL</div>
+      <div class="fact-value">No poner todo en una canasta</div>
+    </div>
+    <div>
+      <div class="fact-label">LO QUE IMPORTA</div>
+      <div class="fact-value">Baja correlación entre activos</div>
+    </div>
+    <div>
+      <div class="fact-label">UN ETF PUEDE DARTE</div>
+      <div class="fact-value">Cientos de empresas de golpe</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué es diversificar?</h2>
+    <p>Es no poner todo tu dinero en una sola cosa. Si repartes tu dinero en varias cosas distintas, y una de ellas sale mal, no pierdes todo — las otras pueden ayudarte a compensar.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como no llevar todos los huevos en una sola canasta al caminar. Si se te cae la canasta, pierdes todos los huevos. Si los repartes en varias canastas, aunque se te caiga una, no pierdes todos.
+    </div>
+
+    <h2>¿Cómo lo hago fácil?</h2>
+    <p>Comprando un solo "paquete" que ya trae adentro pedacitos de muchas empresas distintas (como un ETF), en vez de comprar solo una empresa.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>¿Qué es diversificar?</h2>
+    <p>Es distribuir tu dinero entre distintos tipos de inversión, para que si a una le va mal, las demás puedan compensar esa pérdida. La idea central es no depender de un solo mercado, sector o empresa.</p>
+
+    <h2>Un error común: diversificar "de mentiras"</h2>
+    <p>Tener varias acciones no siempre es diversificar de verdad. Si compras 10 acciones, pero todas son de empresas de tecnología, y el sector tecnológico cae, las 10 caen juntas — eso no es diversificación real.</p>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      La verdadera diversificación busca activos que <strong>no se muevan igual</strong> ante los mismos eventos del mercado — diferentes sectores, diferentes tipos de activo (acciones, bonos, CETES), y diferentes países.
+    </div>
+
+    <h2>La forma más fácil de diversificar</h2>
+    <p>Un solo ETF puede darte acceso a cientos de empresas de un solo golpe. Por ejemplo, un ETF que sigue el mercado mexicano completo, o uno que sigue las 500 empresas más grandes de Estados Unidos — con 2 o 3 ETFs distintos ya tienes una diversificación bastante amplia.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Los pilares de un portafolio diversificado</h2>
+    <ul class="reqs">
+      <li><strong>Por clase de activo:</strong> combina acciones, bonos/CETES, y quizás bienes raíces — cada clase reacciona distinto ante los mismos eventos económicos.</li>
+      <li><strong>Por sector:</strong> no concentres todo en un solo sector (tecnología, energía, consumo) — si ese sector específico se ve afectado, todo tu portafolio cae junto.</li>
+      <li><strong>Por geografía:</strong> tener parte de tu dinero fuera de México (en dólares, ETFs internacionales) te protege de que la devaluación del peso o problemas económicos locales golpeen el 100% de tu patrimonio.</li>
+      <li><strong>Por plazo:</strong> combina inversiones de corto plazo (CETES a 1 año), mediano plazo (fondos a 3-5 años) y largo plazo (acciones a 10+ años) — así siempre tienes liquidez disponible sin tener que vender algo a largo plazo en mal momento.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">REBALANCEO</span>
+      Con el tiempo, tu portafolio se desbalancea: si empezaste con 50% en acciones y estas subieron mucho, ahora quizás tengas 70%. Rebalancear significa vender un poco de lo que subió y comprar más de lo que se quedó atrás, para regresar a tu proporción original — esto en la práctica te hace "comprar barato y vender caro" de forma automática.
+    </div>
+
+    <h2>La trampa de la falsa diversificación</h2>
+    <p>Tener 10 acciones tecnológicas NO es diversificar, aunque parezca que sí por tener "varias cosas". La diversificación real depende de que los activos elegidos respondan de forma diferente ante las mismas condiciones de mercado — calidad de la mezcla, no solo cantidad de nombres distintos.</p>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>El concepto de correlación</h2>
+    <p>La diversificación efectiva depende de la correlación entre los activos, no solo de su cantidad o variedad aparente. Dos activos con alta correlación positiva se mueven en la misma dirección ante los mismos choques de mercado, anulando el beneficio diversificador aunque nominalmente sean "distintos". El objetivo es combinar activos con baja o negativa correlación, de modo que los rendimientos positivos de unos compensen los negativos de otros, reduciendo la volatilidad total del portafolio sin necesariamente sacrificar el rendimiento esperado.</p>
+
+    <h2>Medición del beneficio: Sharpe ratio</h2>
+    <p>El Sharpe ratio mide el rendimiento obtenido por unidad de riesgo asumido (volatilidad). Portafolios diversificados entre múltiples clases de activos (cross-asset) han mostrado consistentemente un Sharpe ratio superior frente a carteras concentradas exclusivamente en acciones, o en combinaciones simples de acciones y bonos — evidencia de que la diversificación mejora la eficiencia riesgo-retorno, no solo reduce el riesgo en términos absolutos.</p>
+
+    <div class="example-box">
+      <span class="tag">DIVERSIFICACIÓN INTERNACIONAL Y CAMBIARIA</span>
+      Para un inversionista mexicano, mantener el 100% del portafolio denominado en pesos concentra el riesgo cambiario y el riesgo país en una sola economía emergente. Dolarizar una porción del portafolio (vía ETFs en dólares, cuentas en divisas, o activos internacionales) reduce esta concentración y añade acceso a dinámicas de mercado no correlacionadas con el ciclo económico doméstico.
+    </div>
+
+    <h2>Diversificación desde el flujo, no solo desde el activo</h2>
+    <p>Un enfoque más avanzado considera la estabilidad y el origen del flujo de ingresos de cada activo, no solo su clasificación nominal. Instrumentos de deuda privada o crédito estructurado, con flujos contractuales predecibles y baja correlación con el "ruido" diario de mercados cotizados, funcionan como diversificadores funcionales adicionales, complementando la diversificación tradicional por clase de activo.</p>
+
+    <h2>Consideración de horizonte y perfil</h2>
+    <p>La asignación óptima (qué porcentaje en cada clase de activo) depende de la edad, tolerancia al riesgo y estabilidad de ingresos del inversionista. Un inversionista joven con horizonte largo puede tolerar mayor ponderación en renta variable; uno con ingresos variables puede requerir mayor peso relativo en instrumentos líquidos y de bajo riesgo, independientemente de su edad.</p>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. La diversificación reduce el riesgo pero no lo elimina, ni garantiza ganancias. No constituye una recomendación de portafolio específica — no sustituye la asesoría de un asesor de inversiones certificado.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
