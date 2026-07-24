@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CETES explicados a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.05rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="inversiones.html" class="back-link">← volver a inversiones y acciones</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --inversion / artículo 02</div>
+    <h1>CETES: la inversión "sin riesgo" del gobierno</h1>
+    <p class="subtitle">Le prestas dinero al gobierno mexicano por un tiempo corto, y te lo regresa con un poco más — la puerta de entrada más simple para empezar a invertir.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">INVERSIÓN MÍNIMA</div>
+      <div class="fact-value">$100 pesos</div>
+    </div>
+    <div>
+      <div class="fact-label">PLAZOS</div>
+      <div class="fact-value">28, 91, 182 y 364 días</div>
+    </div>
+    <div>
+      <div class="fact-label">RETENCIÓN ISR 2026</div>
+      <div class="fact-value">0.90% anual</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué son los CETES?</h2>
+    <p>Es cuando tú le prestas tu dinero al gobierno de México por un tiempo cortito, y a cambio, el gobierno te devuelve un poquito más de lo que le prestaste. Ese "poquito más" es tu ganancia.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como prestarle $10 pesos a un amigo muy responsable que siempre paga, y que te devuelve $10.50 después de unas semanas — ganaste 50 centavos solo por prestarle.
+    </div>
+
+    <h2>¿Es seguro?</h2>
+    <p>Es de las formas más seguras de invertir que existen en México, porque quien te debe el dinero es el propio gobierno federal, no una empresa que podría quebrar.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>¿Qué son los CETES?</h2>
+    <p>Los Certificados de la Tesorería de la Federación (CETES) son instrumentos de deuda de corto plazo emitidos por el Gobierno Federal. Se compran "a descuento" (pagas menos de su valor final) y al vencer recibes el valor completo — la diferencia es tu ganancia.</p>
+
+    <h2>¿Cómo se compran?</h2>
+    <p>A través de <strong>Cetesdirecto.com</strong>, la plataforma oficial del gobierno, sin necesidad de un banco intermediario y sin comisiones. Necesitas ser mayor de edad, tener CURP y una cuenta bancaria a tu nombre.</p>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      Puedes empezar con solo $100 pesos, sin importar el plazo que elijas — es de las inversiones con la entrada más baja que existen en México.
+    </div>
+
+    <h2>¿Cuánto dan de rendimiento?</h2>
+    <p>Las tasas cambian cada semana según una subasta de Banxico, pero en 2026 rondan entre 6.5% y 7.2% anual, dependiendo del plazo — generalmente por encima de la inflación, lo que significa que tu dinero no pierde poder de compra con el tiempo.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Mecánica de los CETES</h2>
+    <p>Los CETES se emiten a descuento: compras el título por debajo de su valor nominal ($10 pesos por título) y al vencimiento recibes el valor completo. La diferencia entre lo que pagaste y lo que recibes es tu rendimiento, expresado como tasa anualizada.</p>
+
+    <h2>Plazos y tasas de referencia (2026)</h2>
+    <ul class="reqs">
+      <li><strong>28 días:</strong> aproximadamente 6.5% anual.</li>
+      <li><strong>91 días:</strong> aproximadamente 6.5% anual.</li>
+      <li><strong>182 días:</strong> aproximadamente 6.7% anual.</li>
+      <li><strong>364 días:</strong> aproximadamente 7.2% anual.</li>
+    </ul>
+    <p>Estas tasas se actualizan cada semana según la subasta primaria de Banxico (los martes) — las cifras exactas cambian, así que conviene revisarlas directamente en Cetesdirecto antes de invertir.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO CON NÚMEROS</span>
+      Invertir $10,000 pesos a 364 días, con una tasa cercana a 7.2% anual, generaría un rendimiento bruto aproximado de $720 pesos al vencimiento — antes de la retención de impuesto correspondiente.
+    </div>
+
+    <h2>Impuestos y liquidez</h2>
+    <p>Desde 2026, la retención provisional de ISR sobre estos instrumentos subió de 0.50% a <strong>0.90% anual</strong> sobre el capital invertido, conforme a la Ley de Ingresos de la Federación. Sobre liquidez: puedes vender tus CETES antes del vencimiento en el mercado secundario, pero el precio depende del mercado y podrías recibir menos de lo invertido — para necesitar el dinero de un día para otro sin penalización, existe un instrumento hermano llamado Bondia, diseñado para liquidez diaria.</p>
+
+    <h2>Otros instrumentos en la misma plataforma</h2>
+    <p>Cetesdirecto también ofrece Udibonos (indexados a la inflación), Bonos M (plazos de 3 a 30 años con pago semestral fijo) y Bondes F (tasa variable) — todos respaldados por el Gobierno Federal, para distintos horizontes de inversión.</p>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Estructura del instrumento</h2>
+    <p>Los CETES son títulos de deuda gubernamental de corto plazo, colocados mediante subasta primaria semanal (martes) conforme a la política de deuda pública de la SHCP y operada técnicamente por Banxico. Se emiten a descuento sobre su valor nominal de $10 pesos por título, con plazos estandarizados de 28, 91, 182 y 364 días. El rendimiento se determina por la tasa de descuento resultante de la subasta, que fluctúa según las condiciones de liquidez del sistema financiero y la postura de política monetaria de Banxico.</p>
+
+    <h2>Régimen fiscal 2026</h2>
+    <p>La Ley de Ingresos de la Federación 2026 incrementó la tasa de retención provisional de ISR sobre intereses (aplicable a CETES, Bondia y otros instrumentos de deuda gubernamental) de 0.50% a <strong>0.90% anual</strong> sobre el capital, prorrateada por los días de inversión. Para contribuyentes cuyo único ingreso sean estos intereses y no superen los $400,000 anuales, la retención puede considerarse pago definitivo; en caso de tener otros ingresos (salarios, honorarios), deben acumularse en la declaración anual conforme al Capítulo VI del Título IV de la LISR.</p>
+
+    <div class="example-box">
+      <span class="tag">RIESGO DE MERCADO SECUNDARIO</span>
+      La venta anticipada en el mercado secundario está sujeta a riesgo de tasa de interés: si las tasas vigentes suben después de tu compra, el precio de mercado de tu título puede caer por debajo de tu costo de adquisición, generando una posible minusvalía si necesitas liquidar antes del vencimiento.
+    </div>
+
+    <h2>Consideraciones de portafolio</h2>
+    <p>Los CETES ofrecen una tasa nominal competitiva frente a instrumentos de ahorro tradicionales, con riesgo de crédito prácticamente nulo (respaldo soberano) pero con rendimiento esperado inferior al de instrumentos de renta variable en horizontes largos. Su rol típico en un portafolio es el de reserva de liquidez de bajo riesgo (fondo de emergencia, tier 2) o componente de renta fija de corto plazo, no como vehículo de crecimiento patrimonial a largo plazo.</p>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general, con tasas de referencia vigentes en 2026 que cambian semanalmente. Consulta las tasas actuales directamente en cetesdirecto.com antes de invertir. No sustituye la asesoría de un asesor financiero certificado.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
