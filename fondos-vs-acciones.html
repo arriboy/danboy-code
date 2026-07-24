@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fondos vs. acciones individuales explicado a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.02rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="inversiones.html" class="back-link">← volver a inversiones y acciones</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --inversion / artículo 03</div>
+    <h1>Fondos de inversión vs. acciones individuales</h1>
+    <p class="subtitle">No es cuál "rinde más" — es cuál estrategia puedes sostener de verdad con tu tiempo y tolerancia al riesgo.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">ACCIÓN INDIVIDUAL</div>
+      <div class="fact-value">Una sola empresa</div>
+    </div>
+    <div>
+      <div class="fact-label">FONDO / ETF</div>
+      <div class="fact-value">Cientos de empresas juntas</div>
+    </div>
+    <div>
+      <div class="fact-label">RECOMENDACIÓN GENERAL</div>
+      <div class="fact-value">Principiantes: fondos/ETFs primero</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Cuál es la diferencia?</h2>
+    <p>Una acción individual es un pedacito de UNA sola empresa. Un fondo (o ETF) es como una canasta que junta pedacitos de MUCHAS empresas diferentes, todas en un solo lugar.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como la diferencia entre apostarle a un solo caballo en una carrera (acción individual) o apostarle a todo el equipo completo (fondo) — si un caballo se cae, los demás pueden seguir corriendo bien.
+    </div>
+
+    <h2>¿Cuál es mejor para empezar?</h2>
+    <p>Para alguien que apenas empieza, los fondos o ETFs suelen ser más tranquilos, porque si una empresa de la canasta le va mal, las demás pueden compensarlo.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>Acciones individuales</h2>
+    <p>Comprar la acción de una sola empresa te da control total sobre en qué inviertes, y el potencial de ganar mucho si esa empresa crece. El riesgo es que también puedes perder mucho si le va mal — todo tu dinero depende de una sola compañía.</p>
+
+    <h2>Fondos de inversión y ETFs</h2>
+    <p>Ambos juntan el dinero de muchos inversionistas para comprar una mezcla de empresas (o bonos) a la vez. Si una empresa de la mezcla cae, las demás pueden compensar esa pérdida — esto se llama diversificación, y reduce el riesgo de perderlo todo por una sola mala decisión.</p>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      Los ETFs se compran y venden como una acción, con precio en tiempo real durante el día. Los fondos de inversión tradicionales se valoran solo una vez al día, al cierre del mercado.
+    </div>
+
+    <h2>¿Cuál elegir?</h2>
+    <p>Si no tienes tiempo para estudiar reportes financieros de empresas específicas, los fondos y ETFs suelen ser la opción más práctica. Si te interesa aprender a fondo sobre empresas particulares y estás dispuesto a asumir más riesgo, las acciones individuales dan más control.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Tres caminos, no dos</h2>
+    <p>En realidad hay tres opciones a comparar, cada una con su propia lógica:</p>
+    <ul class="reqs">
+      <li><strong>Acciones individuales:</strong> control total sobre qué empresas eliges, potencial de rendimiento alto, pero riesgo concentrado en pocas compañías y necesidad de análisis y monitoreo constante.</li>
+      <li><strong>ETFs (fondos cotizados):</strong> agrupan cientos de acciones o bonos en un solo instrumento, se negocian en bolsa igual que una acción (precio en tiempo real, compra/venta durante el día), y suelen tener costos más bajos que los fondos tradicionales.</li>
+      <li><strong>Fondos de inversión tradicionales:</strong> también diversifican, pero cuentan con un administrador que decide activamente qué comprar o vender; se valoran una vez al día al cierre, y suelen tener comisiones de gestión más altas que un ETF equivalente.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">GESTIÓN ACTIVA VS. PASIVA</span>
+      Los fondos de inversión tradicionales suelen ser de gestión activa (un administrador toma decisiones buscando "ganarle" al mercado). La mayoría de los ETFs son de gestión pasiva (solo replican un índice ya existente) — esto explica por qué sus costos suelen ser menores.
+    </div>
+
+    <h2>Qué revisar antes de elegir un fondo o ETF</h2>
+    <ul class="reqs">
+      <li>El costo total (comisión de gestión, conocida como TER) — cuesta más de lo que parece a simple vista si no lo revisas.</li>
+      <li>En qué invierte realmente el fondo — algunos nombres suenan conservadores pero incluyen activos más riesgosos de lo que aparentan.</li>
+      <li>La liquidez — un ETF se vende en cualquier momento del día de mercado; un fondo tradicional puede tener reglas y plazos de liquidación distintos.</li>
+    </ul>
+
+    <h2>¿Cuál conviene según tu perfil?</h2>
+    <p>Si prefieres una ruta simple, con diversificación automática y sin necesidad de estar revisando el mercado constantemente, los ETFs suelen ser el punto de entrada más razonable para principiantes. Las acciones individuales tienen más sentido cuando ya entiendes cómo analizar una empresa y estás dispuesto a asumir el riesgo de concentración.</p>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Estructura y mecánica de cada vehículo</h2>
+    <p>Los ETFs (Exchange Traded Funds) replican, en su mayoría, un índice subyacente mediante gestión pasiva, cotizando en bolsa con creación/redención de participaciones a través de participantes autorizados, lo que mantiene su precio de mercado cercano a su Valor Neto de Activos (NAV) intradía. Los fondos de inversión tradicionales operan bajo gestión activa mediante un administrador de portafolio que ejecuta decisiones discrecionales de asignación, valorándose una única vez al día al precio de cierre, con procesos de suscripción/redención sujetos a plazos de liquidación definidos por su prospecto.</p>
+
+    <h2>Costos comparados</h2>
+    <p>El indicador relevante para comparar costos es el TER (Total Expense Ratio), que incorpora comisión de gestión y gastos operativos del vehículo. Los ETFs indexados suelen presentar TERs sustancialmente menores que fondos de gestión activa equivalentes, dado que no requieren un equipo de análisis fundamental para la toma de decisiones de asset allocation. Esta diferencia de costo compone significativamente en horizontes largos, afectando el rendimiento neto acumulado.</p>
+
+    <div class="example-box">
+      <span class="tag">RIESGO IDIOSINCRÁTICO VS. SISTEMÁTICO</span>
+      Una acción individual está expuesta tanto a riesgo sistemático (de mercado) como a riesgo idiosincrático (específico de la empresa: gestión, litigios, disrupciones sectoriales). La diversificación de un ETF o fondo elimina prácticamente el riesgo idiosincrático de una sola compañía, dejando expuesto principalmente el riesgo sistemático del mercado o sector que replica.
+    </div>
+
+    <h2>Consideraciones de asignación de portafolio</h2>
+    <ul class="reqs">
+      <li>Fondos indexados/ETFs de amplio mercado son consistentes con estrategias de largo plazo y bajo mantenimiento, apropiadas para inversionistas sin ventaja informativa o de tiempo para análisis fundamental continuo.</li>
+      <li>Acciones individuales requieren un proceso de research, seguimiento de resultados trimestrales y capacidad de tolerar mayor varianza — apropiadas como componente satélite de un portafolio, no como núcleo del mismo, para la mayoría de los inversionistas no profesionales.</li>
+      <li>Los ETFs sectoriales o geográficos (p. ej., enfocados en México) introducen riesgo de concentración regional/sectorial, relevante en mercados emergentes sujetos a volatilidad cambiaria y de flujos de capital.</li>
+    </ul>
+
+    <h2>Convivencia de ambos vehículos</h2>
+    <p>Los fondos de inversión en México destinan una proporción relevante de sus activos a ETFs como parte de su estrategia de inversión, evidenciando que ambos instrumentos no son mutuamente excluyentes: un fondo puede usar ETFs como componente de implementación de su estrategia de asignación de activos.</p>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. No constituye una recomendación sobre ningún fondo, ETF, acción o institución en particular — toda inversión conlleva riesgo de pérdida de capital. No sustituye la asesoría de un asesor de inversiones certificado.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
