@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suscripciones explicadas a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.02rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="descuentos.html" class="back-link">← volver a descuentos y marketing</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --ahorro / artículo 03</div>
+    <h1>Suscripciones: cómo evitar pagar por cosas que no usas</h1>
+    <p class="subtitle">Un usuario promedio en México puede estar gastando entre $600 y $900 pesos al mes solo en streaming que ya ni siquiera revisa.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">GASTO PROMEDIO EN STREAMING</div>
+      <div class="fact-value">$600–$900 MXN al mes</div>
+    </div>
+    <div>
+      <div class="fact-label">AVISO ANTES DE RENOVAR</div>
+      <div class="fact-value">5 días (ley desde 2025)</div>
+    </div>
+    <div>
+      <div class="fact-label">ROTACIÓN INTELIGENTE</div>
+      <div class="fact-value">Ahorro de hasta 60%</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué es una suscripción?</h2>
+    <p>Es cuando pagas un poquito de dinero cada mes para seguir usando algo (como ver series, escuchar música o usar una app), y ese cobro se repite solo, sin que tengas que pagar cada vez.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como una revista que te llega a casa cada mes automáticamente, aunque ya no la estés leyendo — sigues pagando por ella hasta que le avises a alguien que ya no la quieres.
+    </div>
+
+    <h2>¿Por qué es importante revisarlas?</h2>
+    <p>Porque es fácil olvidarse de una suscripción y seguir pagando por algo que ya no usas — ese dinero, sumado mes tras mes, puede ser bastante al final del año.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>El costo real de las suscripciones olvidadas</h2>
+    <p>Un usuario promedio en México con 4 o 5 plataformas de streaming puede estar pagando entre $600 y $900 pesos al mes — más de $10,000 pesos al año, solo en entretenimiento.</p>
+
+    <h2>Estrategias para gastar menos</h2>
+    <ul class="reqs">
+      <li><strong>Haz un inventario:</strong> anota todas tus suscripciones activas, cuánto cuestan y cada cuándo las usas realmente.</li>
+      <li><strong>Rotación inteligente:</strong> en vez de tener todas las plataformas al mismo tiempo, usa una o dos por 1-2 meses, cancela, y activa otra — puede reducir tu gasto hasta en 60%.</li>
+      <li><strong>Planes con publicidad:</strong> suelen costar entre $40 y $70 pesos menos al mes que el plan sin anuncios.</li>
+      <li><strong>Cancela el mismo día del cobro:</strong> así aprovechas todo el mes que ya pagaste, sin que se renueve el siguiente periodo.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      Desde finales de 2025, una reforma a la Ley Federal de Protección al Consumidor obliga a las plataformas a avisarte con 5 días de anticipación antes de renovar tu suscripción, y a facilitar la cancelación sin trabas.
+    </div>
+
+    <h2>¿Dónde reviso qué tengo activo?</h2>
+    <p>Revisa el estado de cuenta de la tarjeta con la que sueles pagar — ahí aparecen los cargos recurrentes, aunque hayas olvidado que existían.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Por qué las suscripciones son un "gasto silencioso"</h2>
+    <p>Las suscripciones digitales se han vuelto parte del gasto cotidiano, pero su naturaleza recurrente y automática las hace fáciles de subestimar. Estudios de seguimiento de gasto muestran que las personas suelen subestimar su gasto real en suscripciones por un factor de más de 2 veces frente a lo que realmente pagan al sumar todo.</p>
+
+    <h2>La reforma de 2025-2026 en México</h2>
+    <p>Desde diciembre de 2025, una reforma a la Ley Federal de Protección al Consumidor exige a las plataformas de streaming y suscripción:</p>
+    <ul class="reqs">
+      <li>Avisar con al menos 5 días de anticipación antes de renovar automáticamente una suscripción.</li>
+      <li>Facilitar la cancelación sin procesos complicados o trabas innecesarias.</li>
+      <li>Si contrataste el servicio a través de un intermediario (como una tienda de aplicaciones), la cancelación debe poder hacerse desde ese mismo intermediario, no solo desde la plataforma original.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">TRUCO: OFERTAS DE RETENCIÓN</span>
+      Cuando intentas cancelar un servicio que sí usas pero te parece caro, muchas plataformas ofrecen un descuento de retención (frecuentemente 50% durante unos meses) — cancelar y esperar esa oferta de "te extrañamos" suele funcionar en 1-2 semanas.
+    </div>
+
+    <h2>Auditoría mensual</h2>
+    <p>Revisar tus suscripciones activas una vez al mes, como parte de tu revisión financiera regular, evita que se acumulen servicios que ya no aportan valor. Pregúntate: ¿lo sigo usando? ¿sigue mereciendo el precio que pago? ¿hay una opción gratuita o más barata que cubra lo mismo?</p>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Marco regulatorio de renovaciones automáticas</h2>
+    <p>La reforma a la LFPC vigente desde diciembre de 2025 responde directamente a prácticas identificadas por la Profeco como "renovaciones silenciosas" y "cargos automáticos sin autorización clara". El requisito de notificación previa (mínimo 5 días antes del cobro) y la obligación de habilitar procesos de cancelación simétricos al de contratación (mismo canal, sin fricciones adicionales) buscan corregir la asimetría estructural entre la facilidad de suscribirse y la dificultad histórica de cancelar, un patrón de diseño conocido en la literatura de protección al consumidor como "dark pattern".</p>
+
+    <h2>Segmentación del gasto en suscripciones digitales</h2>
+    <p>El gasto total en suscripciones de un hogar típicamente se compone de: entretenimiento audiovisual (streaming), música, productividad/software, almacenamiento en la nube, y membresías de bienestar (gimnasio, apps de salud). Un análisis de mercados comparables muestra que, al sumar todas las categorías más allá del streaming puro, el gasto mensual total en suscripciones de un usuario activo puede duplicar o triplicar la cifra que esa misma persona estimaría de memoria.</p>
+
+    <div class="example-box">
+      <span class="tag">HERRAMIENTAS DE AUDITORÍA</span>
+      Existen aplicaciones especializadas en detectar cargos recurrentes vinculando (o sin vincular, según la herramienta) la cuenta bancaria del usuario, que generan un inventario automático de suscripciones activas — útil quiero como primer paso de diagnóstico antes de decidir qué cancelar, especialmente cuando el número de servicios activos supera lo que la persona recuerda de memoria.
+    </div>
+
+    <h2>Estrategia de optimización: rotación vs. suscripción permanente</h2>
+    <p>La rotación inteligente de plataformas de streaming (activar-consumir-cancelar-repetir con otra plataforma) explota la ausencia de penalización por cancelación en la mayoría de los servicios de este tipo en México, permitiendo mantener acceso al catálogo relevante sin incurrir en el costo simultáneo de múltiples suscripciones activas. Esta estrategia es más efectiva cuando el consumo del usuario se concentra en contenido específico y finito (una serie, una temporada) en lugar de un consumo disperso y continuo across múltiples plataformas.</p>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. Si una plataforma no respeta tu derecho a cancelar o te cobra sin autorización clara, puedes reportarlo a la Profeco. No sustituye la asesoría de un profesional financiero certificado.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
