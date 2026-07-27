@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trucos publicitarios explicados a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.02rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="descuentos.html" class="back-link">← volver a descuentos y marketing</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --ahorro / artículo 02</div>
+    <h1>Marketing: cómo detectar trucos publicitarios y comprar mejor</h1>
+    <p class="subtitle">La Profeco revisó 618 comercios digitales y encontró irregularidades en 1 de cada 8 — aprende a ver lo que ellos ya identificaron.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">IRREGULARIDADES DETECTADAS</div>
+      <div class="fact-value">1 de cada 8 comercios</div>
+    </div>
+    <div>
+      <div class="fact-label">MULTAS POR ENGAÑO</div>
+      <div class="fact-value">Hasta $6.3 millones MXN</div>
+    </div>
+    <div>
+      <div class="fact-label">REPORTAR A</div>
+      <div class="fact-value">procypubli@profeco.gob.mx</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué es un truco publicitario?</h2>
+    <p>Es cuando un anuncio te hace creer algo que no es del todo cierto, para que quieras comprar más rápido — como decir que "solo quedan 2" cuando en realidad hay muchos más.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como cuando alguien te dice "si no lo compras ahora, se acaba" para que decidas rápido sin pensarlo bien — aunque en realidad no sea cierto.
+    </div>
+
+    <h2>¿Cómo me protejo?</h2>
+    <p>Tómate tu tiempo antes de comprar algo solo porque el anuncio dice que "hay que apurarse". Si algo suena demasiado bueno para ser verdad, probablemente no lo sea.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>Trucos comunes que debes reconocer</h2>
+    <ul class="reqs">
+      <li><strong>Descuentos inflados:</strong> subir el precio "original" días antes de la oferta, para que el descuento parezca mayor de lo que realmente es.</li>
+      <li><strong>Falsa urgencia o escasez:</strong> mensajes de "solo quedan 2" o cuentas regresivas que no reflejan la disponibilidad real del producto.</li>
+      <li><strong>Precio anunciado vs. precio final:</strong> el precio que ves al principio no siempre coincide con lo que terminas pagando al finalizar la compra.</li>
+      <li><strong>Ofertas irreales:</strong> productos muy caros anunciados a un precio absurdamente bajo — si suena imposible, normalmente lo es.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      La Profeco supervisó 618 comercios digitales en México y encontró posibles irregularidades publicitarias en cerca de 1 de cada 8 — esto confirma que no es paranoia, es una práctica real y frecuente.
+    </div>
+
+    <h2>Herramientas para verificar</h2>
+    <p>Existen extensiones de navegador (como Keepa, para productos de Amazon) que muestran el historial real de precios de un producto — te dejan ver si el "precio original" tachado alguna vez existió de verdad, o si es una cifra inventada.</p>
+
+    <h2>¿Qué hago si veo publicidad engañosa?</h2>
+    <p>Puedes reportarla directamente a la Profeco, al correo procypubli@profeco.gob.mx — las empresas que incumplen pueden recibir multas significativas.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Los 6 elementos de publicidad engañosa según Profeco</h2>
+    <p>La Procuraduría Federal del Consumidor identifica patrones específicos para calificar publicidad como engañosa, entre ellos:</p>
+    <ul class="reqs">
+      <li><strong>Publicidad artificiosa:</strong> genera expectativas falsas sobre el producto (ej. "obtén un teléfono de última generación sin pagar nada").</li>
+      <li><strong>Información inexacta:</strong> falta de precisión en lo ofrecido, como prometer "cobertura total" sin especificar limitaciones reales.</li>
+      <li><strong>Información falsa:</strong> anunciar algo que no existe o no se puede cumplir en la práctica.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO REAL DOCUMENTADO</span>
+      Plataformas de venta en línea han anunciado productos de marca conocida a precios extremadamente bajos (por ejemplo, un celular de gama alta a menos de $10 pesos) que resultan ser un señuelo — al intentar comprar, el precio o el producto real no corresponden con lo anunciado.
+    </div>
+
+    <h2>Consecuencias para las empresas que engañan</h2>
+    <p>La Profeco puede aplicar multas desde $205 hasta más de $20,000 pesos por infracción inicial, con sanciones acumulables que pueden superar los $6.3 millones de pesos en casos graves o reincidentes, conforme al artículo 128 Bis de la Ley Federal de Protección al Consumidor.</p>
+
+    <h2>Cómo protegerte y qué hacer si te engañan</h2>
+    <ul class="reqs">
+      <li>Compara el historial de precios antes de confiar en un "descuento" anunciado.</li>
+      <li>Revisa los términos y condiciones completos de cualquier promoción, no solo el titular llamativo.</li>
+      <li>Verifica la reputación del vendedor, especialmente en marketplaces con múltiples vendedores externos.</li>
+      <li>Si detectas un engaño, guarda evidencia (capturas de pantalla, fotos del anuncio, tu ticket) y repórtalo a procypubli@profeco.gob.mx.</li>
+    </ul>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Marco legal de la publicidad engañosa</h2>
+    <p>El Capítulo III de la Ley Federal de Protección al Consumidor (artículos 32 al 45) positiviza la noción de "publicidad o información engañosa o abusiva", estableciendo criterios enunciativos (no exhaustivos) para su calificación. El artículo 32 no requiere un catálogo cerrado de conductas para configurar la infracción, lo que otorga a la autoridad un margen interpretativo amplio ante nuevas modalidades de publicidad digital, incluyendo formatos como "infomerciales" o promoción encubierta a través de figuras de medios de comunicación.</p>
+
+    <h2>Régimen sancionador vigente en 2026</h2>
+    <p>Conforme al artículo 128 Bis de la LFPC, las sanciones por publicidad engañosa o incumplimiento grave de promociones pueden escalar desde montos iniciales de un rango de miles de pesos hasta acumulados superiores a $6.3 millones de pesos, dependiendo de la gravedad, reincidencia y alcance de la infracción. Adicionalmente, la Profeco puede aplicar sanciones diarias mientras persista la conducta infractora detectada, conforme a las facultades del artículo 25 de la misma ley.</p>
+
+    <div class="example-box">
+      <span class="tag">CASO DE ESTUDIO: TEMPORADAS DE ALTO RIESGO</span>
+      Durante eventos masivos de venta (Hot Sale, Buen Fin, boletos de eventos deportivos internacionales), la Profeco ha detectado un incremento sistemático en la incidencia de precios especulativos, alertas falsas de escasez generadas algorítmicamente en tiempo real, y sitios clonados que simulan ser distribuidores oficiales — patrones documentados oficialmente en alertas específicas emitidas por la dependencia.
+    </div>
+
+    <h2>Herramienta preventiva: copy advice</h2>
+    <p>La Profeco ofrece a las propias empresas un servicio gratuito de "diagnóstico publicitario" (copy advice) para revisar piezas publicitarias antes de su difusión y evitar incurrir en publicidad engañosa — su existencia es un indicador de que la autoridad prioriza la prevención regulatoria sobre la sanción posterior, aunque mantiene ambas vías activas.</p>
+
+    <h2>Estrategia de verificación del consumidor</h2>
+    <ul class="reqs">
+      <li>Herramientas de historial de precios (ej. extensiones tipo Keepa) permiten contrastar el "precio original" anunciado contra el precio real histórico del producto en la plataforma.</li>
+      <li>La documentación de evidencia (capturas, tickets, correos de confirmación) al momento de detectar la irregularidad fortalece cualquier reclamo posterior ante Profeco.</li>
+      <li>La verificación de la fuente oficial de venta (dominio verificado, canales autorizados) es especialmente crítica en la reventa de boletos y productos de alta demanda, donde el fraude mediante sitios clonados es una modalidad documentada activamente por la autoridad.</li>
+    </ul>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. Si detectas publicidad engañosa, puedes reportarla directamente a procypubli@profeco.gob.mx. No sustituye la asesoría de un profesional legal en casos específicos de fraude.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
