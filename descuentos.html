@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descuentos y marketing — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .module-header{ padding: 56px 0 40px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .article-list{ display:flex; flex-direction: column; gap: 14px; padding-bottom: 80px; }
+  .article-card{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; text-decoration: none;
+    display:flex; justify-content: space-between; align-items: center; gap: 20px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .article-card:hover{ border-color: rgba(242,183,5,0.4); transform: translateY(-2px); }
+  .article-card .num{ font-family: var(--mono); font-size: 0.78rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  .article-card h3{ font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+  .article-card p{ color: var(--bone-dim); font-size: 0.92rem; }
+  .article-card .arrow{ font-family: var(--mono); color: var(--bone-dim); font-size: 1.2rem; flex-shrink: 0; }
+  .article-card.soon{ opacity: 0.5; pointer-events: none; }
+  .article-card.soon .num{ color: var(--bone-dim); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="index.html" class="back-link">← volver al inicio</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="module-header">
+    <div class="eyebrow">$ danboy --ahorro</div>
+    <h1>Descuentos y marketing</h1>
+    <p class="subtitle">Cómo aplicar a promociones, beneficios y programas que la mayoría deja pasar por no saber que existen — y cómo protegerte de trucos publicitarios y prácticas ilegales.</p>
+  </div>
+
+  <div class="article-list">
+    <a href="descuentos-promociones.html" class="article-card">
+      <div>
+        <span class="num">ARTÍCULO 01</span>
+        <h3>Descuentos y promociones para pagar menos por cosas comunes</h3>
+        <p>El ahorro real casi nunca está en un solo cupón — está en combinar varias capas de descuento.</p>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+
+    <div class="article-card soon">
+      <div>
+        <span class="num">PRÓXIMAMENTE</span>
+        <h3>Marketing: cómo detectar trucos publicitarios y comprar mejor</h3>
+        <p>En construcción.</p>
+      </div>
+    </div>
+
+    <div class="article-card soon">
+      <div>
+        <span class="num">PRÓXIMAMENTE</span>
+        <h3>Suscripciones: cómo evitar pagar por cosas que no usas</h3>
+        <p>En construcción.</p>
+      </div>
+    </div>
+
+    <div class="article-card soon">
+      <div>
+        <span class="num">PRÓXIMAMENTE</span>
+        <h3>Compras en línea seguras y cómo evitar fraudes</h3>
+        <p>En construcción.</p>
+      </div>
+    </div>
+
+    <div class="article-card soon">
+      <div>
+        <span class="num">PRÓXIMAMENTE</span>
+        <h3>Tu derecho a no permitir que revisen tu ticket al salir de la tienda</h3>
+        <p>En construcción.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="wrap">
+  danboy-code · módulo en construcción · 2026
+</footer>
+
+</body>
+</html>
