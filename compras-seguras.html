@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compras en línea seguras explicadas a tu nivel — Danboy-code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0B0F14; --slate: #1B222B; --slate-2: #242C36;
+    --bone: #E7E4DA; --bone-dim: #A9A69C;
+    --gold: #F2B705; --coral: #FF4757; --mint: #37D9A4;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--ink); color: var(--bone);
+    font-family: var(--body); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  header{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(11,15,20,0.85); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(231,228,218,0.08);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0; max-width: 1120px; margin: 0 auto;
+    padding-left: 24px; padding-right: 24px;
+  }
+  .logo{
+    font-family: var(--mono); font-weight: 600; font-size: 1.05rem;
+    text-decoration: none; display:flex; align-items:center;
+  }
+  .logo .accent{ color: var(--gold); }
+  .logo .dim{ color: var(--bone-dim); }
+  .back-link{ font-family: var(--mono); font-size: 0.85rem; color: var(--bone-dim); text-decoration: none; }
+  .back-link:hover{ color: var(--bone); }
+  .article-header{ padding: 56px 0 28px; }
+  .eyebrow{ font-family: var(--mono); font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; }
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.15; margin-bottom: 16px;
+  }
+  .subtitle{ color: var(--bone-dim); font-size: 1.05rem; max-width: 62ch; }
+  .facts{
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 22px 24px; margin: 32px 0 44px;
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 640px){ .facts{ grid-template-columns: 1fr; } }
+  .fact-label{ font-family: var(--mono); font-size: 0.75rem; color: var(--bone-dim); margin-bottom: 6px; }
+  .fact-value{ font-family: var(--display); font-weight: 600; color: var(--mint); font-size: 1.02rem; }
+  .level-bar{
+    position: sticky; top: 66px; z-index: 15;
+    background: var(--slate); border: 1px solid rgba(231,228,218,0.08);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 40px;
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+  }
+  .level-bar-label{ font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim); margin-right: 4px; }
+  .level-tab{
+    font-family: var(--mono); font-size: 0.82rem; background: transparent;
+    border: 1px solid rgba(231,228,218,0.15); color: var(--bone-dim);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; transition: all .15s ease;
+  }
+  .level-tab:hover{ color: var(--bone); border-color: rgba(231,228,218,0.35); }
+  .level-tab.active{ background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 600; }
+  .level-content{ display: none; animation: fade .3s ease; }
+  .level-content.active{ display: block; }
+  @keyframes fade{ from{ opacity: 0; transform: translateY(6px); } to{ opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .level-content{ animation: none; } }
+  .level-content h2{ font-family: var(--display); font-size: 1.3rem; font-weight: 600; margin: 34px 0 14px; }
+  .level-content h2:first-child{ margin-top: 0; }
+  .level-content p{ color: var(--bone); margin-bottom: 14px; max-width: 68ch; }
+  .example-box{
+    background: var(--slate-2); border-left: 3px solid var(--gold);
+    border-radius: 8px; padding: 16px 20px; margin: 18px 0; font-size: 0.95rem;
+  }
+  .example-box .tag{ font-family: var(--mono); font-size: 0.72rem; color: var(--gold); display:block; margin-bottom: 8px; }
+  ul.reqs{ margin: 0 0 14px 20px; color: var(--bone); }
+  ul.reqs li{ margin-bottom: 8px; }
+  .note{
+    background: rgba(242,183,5,0.08); border: 1px solid rgba(242,183,5,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--bone-dim); margin: 40px 0 60px;
+  }
+  .note strong{ color: var(--gold); }
+  footer{
+    border-top: 1px solid rgba(231,228,218,0.08); padding: 28px 0 40px;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--bone-dim);
+    max-width: 1120px; margin: 0 auto; padding-left: 24px; padding-right: 24px;
+  }
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="accent">$</span> danboy<span class="dim">-</span>code</a>
+    <a href="descuentos.html" class="back-link">← volver a descuentos y marketing</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="article-header">
+    <div class="eyebrow">$ danboy --ahorro / artículo 04</div>
+    <h1>Compras en línea seguras y cómo evitar fraudes</h1>
+    <p class="subtitle">Los fraudes en pagos electrónicos durante temporadas de descuento han provocado pérdidas por más de $14,500 millones de pesos en México.</p>
+  </div>
+
+  <div class="facts">
+    <div>
+      <div class="fact-label">PÉRDIDAS POR FRAUDE</div>
+      <div class="fact-value">+$14,500 millones MXN</div>
+    </div>
+    <div>
+      <div class="fact-label">SEÑAL DE SITIO SEGURO</div>
+      <div class="fact-value">"https://" + candado</div>
+    </div>
+    <div>
+      <div class="fact-label">SI TE PIDEN NIP O TOKEN</div>
+      <div class="fact-value">Es fraude, cuelga</div>
+    </div>
+  </div>
+
+  <div class="level-bar" role="tablist" aria-label="Nivel de explicación">
+    <span class="level-bar-label">explicar como a alguien de:</span>
+    <button class="level-tab active" data-level="primaria">Primaria</button>
+    <button class="level-tab" data-level="secundaria">Secundaria</button>
+    <button class="level-tab" data-level="prepa">Preparatoria</button>
+    <button class="level-tab" data-level="experto">Experto</button>
+  </div>
+
+  <article class="level-content active" data-level-content="primaria">
+    <h2>¿Qué es un fraude en línea?</h2>
+    <p>Es cuando alguien crea una tienda falsa (que se ve casi igual a una de verdad) para que le des tu dinero o los datos de tu tarjeta, sin que realmente te vayan a mandar lo que compraste.</p>
+
+    <div class="example-box">
+      <span class="tag">EJEMPLO FÁCIL</span>
+      Es como un disfraz: alguien se pone la ropa de un policía de verdad para que confíes en él, pero en realidad no lo es. Las tiendas falsas usan el logo y los colores de tiendas conocidas para que confíes igual.
+    </div>
+
+    <h2>¿Cómo me protejo?</h2>
+    <p>Compra siempre en la página oficial de la tienda (escribiendo tú mismo la dirección, no dando clic en links de mensajes raros), y nunca le des tu contraseña o el código que te llega por mensaje a nadie que te llame o escriba.</p>
+  </article>
+
+  <article class="level-content" data-level-content="secundaria">
+    <h2>Señales de que un sitio es seguro</h2>
+    <ul class="reqs">
+      <li>La dirección empieza con <strong>"https://"</strong> (no solo "http://") y muestra un candado en la barra del navegador.</li>
+      <li>El nombre del sitio coincide exactamente con la tienda oficial — un cambio mínimo en una letra puede ser una tienda falsa haciéndose pasar por otra.</li>
+      <li>Tiene reseñas y políticas de devolución claras (aunque cuidado: los fraudes también inventan reseñas falsas).</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">DATO CLAVE</span>
+      Durante el Hot Sale y el Buen Fin, los fraudes relacionados con pagos electrónicos y tarjetas en México han generado pérdidas por más de $14,500 millones de pesos — no es un riesgo exagerado, es una realidad medida por la Condusef.
+    </div>
+
+    <h2>Reglas de oro para comprar seguro</h2>
+    <ul class="reqs">
+      <li>Entra a las tiendas escribiendo tú mismo la dirección, no dando clic en links de correos o mensajes.</li>
+      <li>Desconfía de precios absurdamente bajos comparados con el precio normal del producto.</li>
+      <li>Nunca compartas tu NIP, contraseña o el código que te llega por mensaje — ningún banco lo pide por teléfono.</li>
+      <li>Usa tarjetas digitales o virtuales cuando sea posible, en vez de dar el número completo de tu tarjeta física.</li>
+    </ul>
+
+    <h2>Si ya caíste en un fraude</h2>
+    <p>Contacta a tu banco de inmediato para bloquear la tarjeta o cuenta afectada, y denuncia el caso ante la Profeco o la Condusef.</p>
+  </article>
+
+  <article class="level-content" data-level-content="prepa">
+    <h2>Modalidades de fraude documentadas</h2>
+    <ul class="reqs">
+      <li><strong>Sitios clonados:</strong> réplicas casi idénticas de tiendas conocidas, con una diferencia mínima en el dominio (una letra o símbolo cambiado), diseñadas para que ingreses tus datos bancarios sin notar la diferencia.</li>
+      <li><strong>Cupones inexistentes:</strong> códigos de descuento falsos que, en lugar de aplicar un descuento, redirigen a páginas de robo de datos.</li>
+      <li><strong>Mensajes falsos de paquetería:</strong> notificaciones que simulan ser de empresas de envío, pidiendo "confirmar datos" o pagar un cargo adicional para liberar un paquete inexistente.</li>
+      <li><strong>Ofertas con pago exclusivo por transferencia:</strong> vendedores que solo aceptan transferencia directa (sin plataforma de pago con protección al comprador), dificultando cualquier reclamo posterior.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="tag">CIFRAS OFICIALES</span>
+      La Condusef reportó pérdidas superiores a $14,500 millones de pesos relacionadas con fraudes en pagos electrónicos y tarjetas durante eventos como Hot Sale y Buen Fin — y la Asociación Mexicana de Venta Online estima que 8 de cada 10 consumidores planean comprar durante estas campañas, lo que multiplica la exposición al riesgo.
+    </div>
+
+    <h2>Herramientas oficiales de verificación</h2>
+    <p>La Profeco mantiene un <strong>Monitoreo de Tiendas Virtuales</strong> donde verifica si los comercios digitales cumplen con la Ley Federal de Protección al Consumidor, y habilita herramientas específicas durante el Hot Sale para detectar páginas falsas antes de comprar. Buscar el "Distintivo Digital" de un comercio es una señal adicional de confiabilidad.</p>
+
+    <h2>Buenas prácticas de protección de datos</h2>
+    <ul class="reqs">
+      <li>Usa tarjetas digitales o virtuales en vez de compartir el número completo de tu tarjeta física.</li>
+      <li>No permitas el autoguardado de información bancaria en sitios que no uses con frecuencia.</li>
+      <li>Monitorea tus movimientos bancarios en tiempo real para detectar cargos no reconocidos de inmediato.</li>
+      <li>Conserva siempre tus comprobantes de pago — son tu evidencia principal ante cualquier aclaración o reclamo.</li>
+    </ul>
+  </article>
+
+  <article class="level-content" data-level-content="experto">
+    <h2>Vectores de ataque durante campañas de venta masiva</h2>
+    <p>Las autoridades financieras mexicanas (Condusef, Profeco, Policía Cibernética) documentan un incremento sistemático en intentos de fraude digital durante ventanas de alta demanda transaccional (Hot Sale, Buen Fin), explicado por el aumento en el volumen de operaciones legítimas que sirve como "cobertura" para operaciones fraudulentas, además de la reducción en el escrutinio individual del consumidor ante la presión de tiempo y la abundancia de ofertas simultáneas.</p>
+
+    <h2>Ingeniería social como vector principal</h2>
+    <p>Los especialistas señalan que el vector de fraude ya no depende únicamente de vulnerabilidades técnicas, sino crecientemente de ingeniería social: páginas clonadas que replican con alta fidelidad el diseño, logotipo y estructura de tiendas legítimas, combinadas con reseñas y calificaciones falsas para simular legitimidad social (prueba social falsificada) y reducir la fricción de desconfianza inicial del usuario.</p>
+
+    <div class="example-box">
+      <span class="tag">PROTOCOLO ANTE SOLICITUDES SOSPECHOSAS</span>
+      Ninguna institución financiera legítima solicita tokens, NIP o contraseñas completas mediante llamada telefónica o mensaje de texto/WhatsApp. Cualquier solicitud de este tipo debe tratarse como intento de fraude confirmado, independientemente de la urgencia o legitimidad aparente del contexto presentado (paquete retenido, cargo sospechoso, "verificación de seguridad").
+    </div>
+
+    <h2>Protocolo de respuesta post-incidente</h2>
+    <ul class="reqs">
+      <li>Contacto inmediato a la institución financiera para bloqueo de tarjeta/cuenta, minimizando la ventana de exposición tras la detección.</li>
+      <li>Documentación del incidente (capturas de pantalla, URLs, comunicaciones recibidas) previo a cualquier reclamo formal.</li>
+      <li>Denuncia ante Profeco (asesoría@profeco.gob.mx) y/o Condusef, según si el incidente involucra a un comercio o a una institución financiera respectivamente.</li>
+      <li>Verificación de la Navegación Segura de Google u herramientas equivalentes de reputación de dominios, como capa adicional de validación antes de introducir datos sensibles en un sitio no reconocido previamente.</li>
+    </ul>
+  </article>
+
+  <div class="note">
+    <strong>Nota:</strong> esta información es educativa y general. Si sospechas de un fraude, contacta de inmediato a tu institución financiera y denuncia ante Profeco o Condusef. No sustituye la asesoría de un profesional de ciberseguridad o legal en casos específicos.
+  </div>
+</main>
+
+<footer>
+  danboy-code · artículo educativo · 2026
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.level-tab');
+  const contents = document.querySelectorAll('.level-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const level = tab.getAttribute('data-level');
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => {
+        c.classList.toggle('active', c.getAttribute('data-level-content') === level);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
